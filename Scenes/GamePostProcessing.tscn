@@ -1,10 +1,10 @@
 [gd_scene load_steps=13 format=3 uid="uid://bhhkfiv5wkapc"]
 
 [ext_resource type="PackedScene" uid="uid://d3lwelmk2syvt" path="res://Scenes/Game.tscn" id="1_8jq5i"]
-[ext_resource type="Shader" path="res://Shaders/scale3x.gdshader" id="2_su0ma"]
-[ext_resource type="Shader" path="res://Shaders/paletteChanger.gdshader" id="2_xhr35"]
+[ext_resource type="Shader" uid="uid://cqdnbr1wlmmnn" path="res://Shaders/scale3x.gdshader" id="2_su0ma"]
+[ext_resource type="Shader" uid="uid://bg5pf70lvytbr" path="res://Shaders/paletteChanger.gdshader" id="2_xhr35"]
 [ext_resource type="Texture2D" uid="uid://cbc6rrjct8wm4" path="res://Assets/Palettes/comfort44s-1x.png" id="3_deqxv"]
-[ext_resource type="Shader" path="res://Shaders/crt.gdshader" id="3_oq85u"]
+[ext_resource type="Shader" uid="uid://d3uouo5ie5hlh" path="res://Shaders/crt.gdshader" id="3_oq85u"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qmv3w"]
 shader = ExtResource("2_xhr35")

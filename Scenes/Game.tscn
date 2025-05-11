@@ -1,6 +1,6 @@
 [gd_scene load_steps=19 format=3 uid="uid://d3lwelmk2syvt"]
 
-[ext_resource type="Script" path="res://Scripts/Game.cs" id="1_vr6ta"]
+[ext_resource type="Script" uid="uid://bfy7w0srwfk2h" path="res://Scripts/Game.cs" id="1_vr6ta"]
 [ext_resource type="PackedScene" uid="uid://de6d0rm7ss734" path="res://Scenes/Pacman.tscn" id="2_7fw10"]
 [ext_resource type="PackedScene" uid="uid://de5rd45iynngm" path="res://Scenes/Ghost.tscn" id="3_wrs1y"]
 [ext_resource type="Texture2D" uid="uid://8nyeebv0klfo" path="res://Assets/Sprites/spritesheet.png" id="5_ysmdo"]
