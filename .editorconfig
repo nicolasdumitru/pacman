@@ -1,0 +1,7 @@
+# Top-most EditorConfig file
+root = true
+
+[*.cs]
+
+# OTBS: Opening braces on the same line
+csharp_new_line_before_open_brace = none

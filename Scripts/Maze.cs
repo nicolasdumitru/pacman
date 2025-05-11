@@ -1,11 +1,13 @@
 using Godot;
 using System;
 
-public static class Maze
-{
-    public enum Tile
-    {
-        Empty = ' ', Wall = 'X', Tunnel = '=', Dot = '.', Pill = 'o'
+public static class Maze {
+    public enum Tile {
+        Empty = ' ',
+        Wall = 'X',
+        Tunnel = '=',
+        Dot = '.',
+        Pill = 'o'
     }
 
     // maze dimensions
@@ -56,12 +58,9 @@ public static class Maze
 
     // redo maze from maze template
 
-    public static void Reset()
-    {
-        for (int j = 0; j < Height; j++)
-        {
-            for (int i = 0; i < Width; i++)
-            {
+    public static void Reset() {
+        for (int j = 0; j < Height; j++) {
+            for (int i = 0; i < Width; i++) {
                 maze[i + j * Width] = (Tile)mazeTemplate[j][i];
             }
         }
@@ -69,21 +68,18 @@ public static class Maze
 
     // set and get tiles from the maze
 
-    public static Tile GetTile(Vector2I tilePosition)
-    {
+    public static Tile GetTile(Vector2I tilePosition) {
         tilePosition = tilePosition.Clamp(Vector2I.Zero, new Vector2I(Width - 1, Height - 1));
         return maze[tilePosition.X + tilePosition.Y * Width];
     }
 
-    public static void SetTile(Vector2I tilePosition, Tile tile)
-    {
+    public static void SetTile(Vector2I tilePosition, Tile tile) {
         maze[tilePosition.X + tilePosition.Y * Width] = tile;
     }
 
     // check if a tile is in red zone
 
-    public static bool IsRedZone(Vector2I tile)
-    {
+    public static bool IsRedZone(Vector2I tile) {
         return ((tile.Y == 23 || tile.Y == 11) && (tile.X >= 11 && tile.X <= 16));
     }
 }
