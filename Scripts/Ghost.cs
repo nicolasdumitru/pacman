@@ -21,27 +21,25 @@ public partial class Ghost : Actor {
     }
 
     public delegate bool LeaveHouseCallback(Ghost g);
-
     public delegate bool IsFrightenedCallback(Ghost g);
-
     public delegate Mode ScatterChasePhaseCallback();
 
+    // Pathfinding state
     private Queue<Vector2I> currentPath = new Queue<Vector2I>();
+    private Vector2I lastPathStart = new Vector2I(-1, -1);
+    private Vector2I lastPathTarget = new Vector2I(-1, -1);
+    private Mode lastMode;
 
-    // some constants between ghosts
-
+    // Ghost constants
     private static readonly Vector2I[] scatterTiles = new Vector2I[4] {
         new Vector2I(25, -3), new Vector2I(2, -3), new Vector2I(27, 31), new Vector2I(0, 31)
     };
-
     private static readonly Vector2I[] startPositions = new Vector2I[] {
         new Vector2I(112, 92), new Vector2I(112, 116), new Vector2I(96, 116), new Vector2I(128, 116)
     };
-
     private static readonly Vector2I[] housePositions = new Vector2I[] {
         new Vector2I(112, 116), new Vector2I(112, 116), new Vector2I(96, 116), new Vector2I(128, 116)
     };
-
     private static readonly Random rand = new Random();
 
     public Type type = Type.Blinky;
@@ -56,18 +54,12 @@ public partial class Ghost : Actor {
             case Direction.Up: return Direction.Down;
             case Direction.Down: return Direction.Up;
         }
-
         return Direction.Right;
     }
 
     public void SetStartState() {
-        // set start position
-
         Position = startPositions[(int)type];
         animationTick = 0;
-
-        // set start mode
-
         switch (type) {
             case Type.Blinky:
                 mode = Mode.Scatter;
@@ -82,57 +74,34 @@ public partial class Ghost : Actor {
                 nextDirection = direction = Direction.Up;
                 break;
         }
+        lastMode = mode;
+        lastPathStart = PositionToTile();
+        lastPathTarget = targetTile;
     }
 
-    public Vector2I GetHousePosition() {
-        return housePositions[(int)type];
-    }
-
-    public Vector2I GetScatterTile() {
-        return scatterTiles[(int)type];
-    }
-
-    // get ghost chase tile, it needs to know pacman's position, also inky uses blinky position
-    // to determine his target tile, so we need to pass an array with all the ghosts too
+    public Vector2I GetHousePosition() => housePositions[(int)type];
+    public Vector2I GetScatterTile() => scatterTiles[(int)type];
 
     public Vector2I GetChaseTile(Pacman pacman, Ghost[] ghosts) {
-        Vector2I pacmanDirectionVector = pacman.GetDirectionVector();
         Vector2I pacmanTile = pacman.PositionToTile();
-
+        Vector2I dir = pacman.GetDirectionVector();
         switch (type) {
             case Type.Blinky:
                 return pacmanTile;
             case Type.Pinky:
-                if (pacmanDirectionVector.Y < 0) {
-                    return pacmanTile + new Vector2I(-4, -4);
-                }
-                else {
-                    return pacmanTile + 4 * pacmanDirectionVector;
-                }
+                if (dir.Y < 0) return pacmanTile + new Vector2I(-4, -4);
+                return pacmanTile + 4 * dir;
             case Type.Inky:
                 Vector2I blinkyTile = ghosts[(int)Type.Blinky].PositionToTile();
-                Vector2I tileInPacmanDirection;
-
-                if (pacmanDirectionVector.Y < 0) {
-                    tileInPacmanDirection = pacmanTile + new Vector2I(-2, -2);
-                }
-                else {
-                    tileInPacmanDirection = pacmanTile + 2 * pacmanDirectionVector;
-                }
-
-                return tileInPacmanDirection + (tileInPacmanDirection - blinkyTile);
+                Vector2I ahead = (dir.Y < 0)
+                    ? pacmanTile + new Vector2I(-2, -2)
+                    : pacmanTile + 2 * dir;
+                return ahead + (ahead - blinkyTile);
             case Type.Clyde:
-                Vector2I ghostTile = PositionToTile();
-                int distanceToPacman = (pacmanTile - ghostTile).LengthSquared();
-
-                if (distanceToPacman < 8 * 8) {
-                    return GetScatterTile();
-                }
-                else {
-                    return pacmanTile;
-                }
+                Vector2I self = PositionToTile();
+                int dist = (pacmanTile - self).LengthSquared();
+                return dist < 64 ? GetScatterTile() : pacmanTile;
         }
-
         return Vector2I.Zero;
     }
 
@@ -142,7 +111,7 @@ public partial class Ghost : Actor {
                 targetTile = GetChaseTile(pacman, ghosts);
                 break;
             case Mode.Scatter:
-                targetTile = scatterTiles[(int)type];
+                targetTile = GetScatterTile();
                 break;
             case Mode.Frightened:
                 targetTile = new Vector2I(rand.Next(Maze.Width), rand.Next(Maze.Height));
@@ -154,17 +123,91 @@ public partial class Ghost : Actor {
                 targetTile = Vector2I.Zero;
                 break;
         }
+    }
 
-        var startTile = PositionToTile();
-        var fullPath = FindPathBFS(startTile, targetTile);
+    public override void Tick(int ticks) {
+        int movePixels = GetSpeed(ticks);
+        for (int i = 0; i < movePixels; i++) {
+            // Handle forced house movement
+            if (mode == Mode.InHouse || mode == Mode.LeaveHouse || mode == Mode.EnterHouse) {
+                bool forced = GetNextDirection();
+                if (CanMove(false) || forced) {
+                    Move(false);
+                    animationTick++;
+                }
+                continue;
+            }
+
+            // Recalculate path only at tile midpoint and when needed
+            Vector2I mid = DistanceToTileMid();
+            if (mid.X == 0 && mid.Y == 0) {
+                Vector2I startTile = PositionToTile();
+                if (mode != lastMode || startTile != lastPathStart || targetTile != lastPathTarget) {
+                    RecalculatePath();
+                    lastMode = mode;
+                    lastPathStart = startTile;
+                    lastPathTarget = targetTile;
+                }
+
+                // Advance along path
+                if (currentPath.Count > 0 && startTile == currentPath.Peek())
+                    currentPath.Dequeue();
+
+                if (currentPath.Count > 0) {
+                    Vector2I nextTile = currentPath.Peek();
+                    Vector2I delta = nextTile - startTile;
+                    direction = (Direction) Array.FindIndex(directionsMap, v => v == delta);
+                }
+            }
+
+            if (CanMove(false)) {
+                Move(false);
+                animationTick++;
+            }
+        }
+    }
+
+    private void RecalculatePath() {
+        var start = PositionToTile();
+        var fullPath = FindPathBFS(start, targetTile);
         currentPath = new Queue<Vector2I>(fullPath);
     }
 
-    /*
-     * get the next direction the ghost should continue if it returns true the direction is forced,
-     * that means that the ghost should continue with that direction even if encounters a wall going through it
-     * this is needed when crossing the ghost door
-     */
+    private List<Vector2I> FindPathBFS(Vector2I start, Vector2I goal) {
+        var queue = new Queue<Vector2I>();
+        var cameFrom = new Dictionary<Vector2I, Vector2I>();
+        queue.Enqueue(start);
+        cameFrom[start] = start;
+
+        while (queue.Count > 0) {
+            var current = queue.Dequeue();
+            if (current == goal) break;
+            foreach (var dir in directionsMap) {
+                var next = current + dir;
+                // Skip out-of-bounds
+                if (next.X < 0 || next.X >= Maze.Width || next.Y < 0 || next.Y >= Maze.Height)
+                    continue;
+                if (Maze.GetTile(next) == Maze.Tile.Wall || cameFrom.ContainsKey(next))
+                    continue;
+                cameFrom[next] = current;
+                queue.Enqueue(next);
+            }
+        }
+
+        var path = new List<Vector2I>();
+        if (!cameFrom.ContainsKey(goal)) return path;
+        for (var at = goal; at != start; at = cameFrom[at])
+            path.Add(at);
+        path.Reverse();
+        return path;
+    }
+
+    // ... rest of your methods (GetNextDirection, UpdateGhostMode, GetSpeed, animations) remain unchanged ...
+
+
+
+    // get ghost chase tile, it needs to know pacman's position, also inky uses blinky position
+    // to determine his target tile, so we need to pass an array with all the ghosts too
 
     private bool GetNextDirection() {
         // check if the ghost is in the house or entering or leaving from it
@@ -467,75 +510,5 @@ public partial class Ghost : Actor {
 
     public override void _Ready() {
         mode = Mode.Chase;
-    }
-
-    // tick
-    public override void Tick(int ticks) {
-        int steps = GetSpeed(ticks);
-        for (int i = 0; i < steps; i++) {
-            // If we’ve reached the next tile or need a new path
-            var tilePos = PositionToTile();
-            if (currentPath.Count == 0 || tilePos == currentPath.Peek()) {
-                // either recompute or dequeue
-                if (currentPath.Count > 0)
-                    currentPath.Dequeue();
-                // if empty but not at goal, recalc
-                if (currentPath.Count == 0 && tilePos != targetTile)
-                    RecalculatePath();
-            }
-
-            if (currentPath.Count > 0) {
-                // Move toward the next point
-                var nextTile = currentPath.Peek();
-                var delta = nextTile - tilePos;
-                // figure out direction enum from delta
-                direction = (Direction)System.Array.FindIndex(directionsMap, v => v == delta);
-                Move(false);
-                animationTick++;
-            }
-        }
-    }
-
-    private void RecalculatePath() {
-        var startTile = PositionToTile();
-        var fullPath = FindPathBFS(startTile, targetTile);
-        currentPath = new Queue<Vector2I>(fullPath);
-    }
-
-    private List<Vector2I> FindPathBFS(Vector2I start, Vector2I goal) {
-        var q = new Queue<Vector2I>();
-        var cameFrom = new Dictionary<Vector2I, Vector2I>();
-        q.Enqueue(start);
-        cameFrom[start] = start;
-
-        while (q.Count > 0) {
-            var current = q.Dequeue();
-            if (current == goal)
-                break;
-
-            // Explore 4 neighbors
-            foreach (var dir in directionsMap) {
-                var next = current + dir;
-                // Skip walls and out‐of‐bounds
-                if (Maze.GetTile(next) == Maze.Tile.Wall || cameFrom.ContainsKey(next))
-                    continue;
-                cameFrom[next] = current;
-                q.Enqueue(next);
-            }
-        }
-
-        // Reconstruct path
-        var path = new List<Vector2I>();
-        if (!cameFrom.ContainsKey(goal))
-            return path; // no path
-
-        var step = goal;
-        while (step != start) {
-            path.Add(step);
-            step = cameFrom[step];
-        }
-
-        path.Reverse();
-        return path;
     }
 }
