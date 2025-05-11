@@ -26,6 +26,8 @@ public partial class Ghost : Actor {
 
     public delegate Mode ScatterChasePhaseCallback();
 
+    private Queue<Vector2I> currentPath = new Queue<Vector2I>();
+
     // some constants between ghosts
 
     private static readonly Vector2I[] scatterTiles = new Vector2I[4] {
@@ -152,6 +154,10 @@ public partial class Ghost : Actor {
                 targetTile = Vector2I.Zero;
                 break;
         }
+
+        var startTile = PositionToTile();
+        var fullPath = FindPathBFS(startTile, targetTile);
+        currentPath = new Queue<Vector2I>(fullPath);
     }
 
     /*
@@ -464,23 +470,72 @@ public partial class Ghost : Actor {
     }
 
     // tick
-
     public override void Tick(int ticks) {
-        // move the ghost
+        int steps = GetSpeed(ticks);
+        for (int i = 0; i < steps; i++) {
+            // If we’ve reached the next tile or need a new path
+            var tilePos = PositionToTile();
+            if (currentPath.Count == 0 || tilePos == currentPath.Peek()) {
+                // either recompute or dequeue
+                if (currentPath.Count > 0)
+                    currentPath.Dequeue();
+                // if empty but not at goal, recalc
+                if (currentPath.Count == 0 && tilePos != targetTile)
+                    RecalculatePath();
+            }
 
-        int numPixelsToMove = GetSpeed(ticks);
-
-        for (int i = 0; i < numPixelsToMove; i++) {
-            // calculate next direction (only when in midpoint of the tile)
-
-            bool forcedMove = GetNextDirection();
-
-            // move along the direction
-
-            if (CanMove(false) || forcedMove) {
+            if (currentPath.Count > 0) {
+                // Move toward the next point
+                var nextTile = currentPath.Peek();
+                var delta = nextTile - tilePos;
+                // figure out direction enum from delta
+                direction = (Direction)System.Array.FindIndex(directionsMap, v => v == delta);
                 Move(false);
                 animationTick++;
             }
         }
+    }
+
+    private void RecalculatePath() {
+        var startTile = PositionToTile();
+        var fullPath = FindPathBFS(startTile, targetTile);
+        currentPath = new Queue<Vector2I>(fullPath);
+    }
+
+    private List<Vector2I> FindPathBFS(Vector2I start, Vector2I goal) {
+        var q = new Queue<Vector2I>();
+        var cameFrom = new Dictionary<Vector2I, Vector2I>();
+        q.Enqueue(start);
+        cameFrom[start] = start;
+
+        while (q.Count > 0) {
+            var current = q.Dequeue();
+            if (current == goal)
+                break;
+
+            // Explore 4 neighbors
+            foreach (var dir in directionsMap) {
+                var next = current + dir;
+                // Skip walls and out‐of‐bounds
+                if (Maze.GetTile(next) == Maze.Tile.Wall || cameFrom.ContainsKey(next))
+                    continue;
+                cameFrom[next] = current;
+                q.Enqueue(next);
+            }
+        }
+
+        // Reconstruct path
+        var path = new List<Vector2I>();
+        if (!cameFrom.ContainsKey(goal))
+            return path; // no path
+
+        var step = goal;
+        while (step != start) {
+            path.Add(step);
+            step = cameFrom[step];
+        }
+
+        path.Reverse();
+        return path;
     }
 }
