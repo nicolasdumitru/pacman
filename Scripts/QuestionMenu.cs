@@ -12,15 +12,19 @@
 //    - buttonBPath -> path to Button B
 //    - buttonCPath -> path to Button C
 //    - buttonDPath -> path to Button D
-// 5. Set the externalProgramPath property to the path of your external program
-// 6. Connect to the AnswerSelected signal in your game logic to handle user choices
-// 7. Connect to the CorrectAnswerSelected and WrongAnswerSelected signals for specific feedback
+// 5. Set up the external program paths:
+//    - externalProgramFileName: Base name of your program (e.g., "question_generator")
+//    - windowsExtension: Extension for Windows (e.g., ".exe")
+//    - linuxExtension: Extension for Linux (often empty or ".sh")
+//    - externalProgramRelativePath: Path relative to your project's res:// path
+// 6. Connect to the AnswerSelected, CorrectAnswerSelected, and WrongAnswerSelected signals
 
 using Godot;
 using System;
 using System.Diagnostics;
 using System.Text.Json;
 using System.Threading.Tasks;
+using System.IO;
 
 public partial class QuestionMenu : Control
 {
@@ -40,7 +44,16 @@ public partial class QuestionMenu : Control
     private NodePath buttonDPath;
 
     [Export]
-    private string externalProgramPath = "";
+    private string externalProgramFileName = "question_generator";
+
+    [Export]
+    private string windowsExtension = ".exe";
+
+    [Export]
+    private string linuxExtension = "";
+
+    [Export]
+    private string externalProgramRelativePath = "res://bin/";
 
     [Export]
     private string[] programArguments = null;
@@ -161,18 +174,69 @@ public partial class QuestionMenu : Control
         Visible = true;
     }
 
+    // Get the platform-specific path to the external program
+    private string GetExternalProgramPath()
+    {
+        string extension = "";
+        string nativePath = "";
+
+        // Determine the OS and set the appropriate extension
+        if (OS.GetName().ToLower().Contains("windows"))
+        {
+            extension = windowsExtension;
+        }
+        else // Linux, macOS, etc.
+        {
+            extension = linuxExtension;
+        }
+
+        // Convert the resource path to an absolute OS path
+        if (externalProgramRelativePath.StartsWith("res://"))
+        {
+            // Get the base directory of the Godot project
+            string projectPath = OS.GetExecutablePath().GetBaseDir();
+
+            // For exported projects, we need to handle it differently
+            if (OS.HasFeature("editor"))
+            {
+                // We're running in the editor
+                nativePath = ProjectSettings.GlobalizePath(externalProgramRelativePath);
+            }
+            else
+            {
+                // We're running in an exported project
+                // Strip "res://" and replace with project path
+                string relativePath = externalProgramRelativePath.Substring(6);
+                nativePath = Path.Combine(projectPath, relativePath);
+            }
+        }
+        else
+        {
+            // If an absolute path is provided, use it directly
+            nativePath = externalProgramRelativePath;
+        }
+
+        // Combine path, filename, and extension
+        string fullPath = Path.Combine(nativePath, externalProgramFileName + extension);
+
+        GD.Print($"Using external program path: {fullPath}");
+        return fullPath;
+    }
+
     // Run the external program and load a question
     public async void LoadQuestionFromExternalProgram()
     {
+        string externalProgramPath = GetExternalProgramPath();
+
         if (string.IsNullOrEmpty(externalProgramPath))
         {
-            GD.PrintErr("External program path is not set!");
+            GD.PrintErr("External program path could not be determined!");
             return;
         }
 
         try
         {
-            string jsonOutput = await RunExternalProgramAsync();
+            string jsonOutput = await RunExternalProgramAsync(externalProgramPath);
             ParseQuestionJson(jsonOutput);
         }
         catch (Exception e)
@@ -183,15 +247,41 @@ public partial class QuestionMenu : Control
     }
 
     // Run the external program and return its stdout output
-    private async Task<string> RunExternalProgramAsync()
+    private async Task<string> RunExternalProgramAsync(string programPath)
     {
         var processStartInfo = new ProcessStartInfo
         {
-            FileName = externalProgramPath,
+            FileName = programPath,
             UseShellExecute = false,
             RedirectStandardOutput = true,
             CreateNoWindow = true
         };
+
+        // Make the file executable on Unix-like systems
+        if (OS.GetName().ToLower() != "windows" && !string.IsNullOrEmpty(linuxExtension))
+        {
+            // Using chmod to make the file executable on Unix
+            var chmodProcess = new Process
+            {
+                StartInfo = new ProcessStartInfo
+                {
+                    FileName = "chmod",
+                    Arguments = $"+x \"{programPath}\"",
+                    UseShellExecute = false,
+                    CreateNoWindow = true
+                }
+            };
+
+            try
+            {
+                chmodProcess.Start();
+                chmodProcess.WaitForExit();
+            }
+            catch (Exception e)
+            {
+                GD.PrintErr($"Failed to make program executable: {e.Message}");
+            }
+        }
 
         // Add arguments if specified
         if (programArguments != null)
@@ -204,11 +294,19 @@ public partial class QuestionMenu : Control
 
         using (var process = new Process { StartInfo = processStartInfo })
         {
-            process.Start();
-            // Read the stdout asynchronously
-            string output = await process.StandardOutput.ReadToEndAsync();
-            await Task.Run(() => process.WaitForExit());
-            return output;
+            try
+            {
+                process.Start();
+                // Read the stdout asynchronously
+                string output = await process.StandardOutput.ReadToEndAsync();
+                await Task.Run(() => process.WaitForExit());
+                return output;
+            }
+            catch (Exception e)
+            {
+                GD.PrintErr($"Failed to run external program: {e.Message}");
+                throw;
+            }
         }
     }
 
