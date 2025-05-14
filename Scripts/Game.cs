@@ -11,6 +11,7 @@ public partial class Game : Node2D {
         Won = (1 << 4), // round won (all dots eaten)
         GameOver = (1 << 5), // round lost and no lifes left
         Reset = (1 << 6), // for freeze the game when reset is called (to avoid update actors in the first tick)
+        Question = (1 << 7), // Freeze for question menu
     }
 
     public enum FruitType {
@@ -43,18 +44,17 @@ public partial class Game : Node2D {
     // scenes pacman and ghosts
 
     [Export] private PackedScene pacmanScene;
-
     [Export] private PackedScene ghostScene;
-
     [Export] private Texture2D dotsTexture;
-
     [Export] private Texture2D readyTextTexture;
-
     [Export] private Texture2D gameOverTextTexture;
-
     [Export] private Texture2D lifeTexture;
-
     [Export] private Texture2D fruitTexture;
+
+    [Export] private PackedScene questionMenuScene;
+    private QuestionMenu questionMenu;
+    private bool questionAnsweredCorrectly = false;
+
 
     private Label scoreText;
     private Label highScoreText;
@@ -456,7 +456,19 @@ public partial class Game : Node2D {
                     ghostEatenSound.Play();
                 }
                 else if (g.mode == Ghost.Mode.Chase || g.mode == Ghost.Mode.Scatter) {
-                    // pacman has been eaten
+                    // Pacman has been eaten - freeze the game and show question
+                    FreezeBy(FreezeType.Question);
+
+                    // Stop sounds temporarily
+                    StopSounds();
+
+                    // Make ghost and pacman still visible but not moving
+                    pacman.Visible = true;
+                    g.Visible = true;
+
+                    // Load and show the question menu
+                    questionMenu.LoadQuestionFromExternalProgram();
+                    questionMenu.Show();
 
                     // freeze the game
 
@@ -496,7 +508,12 @@ public partial class Game : Node2D {
     }
 
     private void UpdatePacmanSprite() {
-        if (IsFrozenBy(FreezeType.EatGhost)) {
+        if (IsFrozenBy(FreezeType.Question)) {
+            // Keep pacman visible but frozen
+            pacman.Visible = true;
+            pacman.SetDefaultSpriteAnimation();
+        }
+        else if (IsFrozenBy(FreezeType.EatGhost)) {
             pacman.Visible = false;
         }
         else if (IsFrozenBy(FreezeType.Dead)) {
@@ -759,6 +776,52 @@ public partial class Game : Node2D {
         // hide mouse cursor
 
         DisplayServer.MouseSetMode(DisplayServer.MouseMode.Hidden);
+
+        // Create question menu
+        questionMenu = (QuestionMenu)questionMenuScene.Instantiate();
+        AddChild(questionMenu);
+        questionMenu.Visible = false;
+
+        // Connect QuestionMenu signals
+        questionMenu.Connect(nameof(QuestionMenu.CorrectAnswerSelected), Callable.From(OnCorrectAnswer));
+        questionMenu.Connect(nameof(QuestionMenu.WrongAnswerSelected), Callable.From<string, string>(OnWrongAnswer));
+    }
+
+    // Methods for handling question answers
+    private void OnCorrectAnswer() {
+        GD.Print("Player answered correctly!");
+        questionAnsweredCorrectly = true;
+        questionMenu.Hide();
+
+        // Resume the game
+        UnFreezeBy(FreezeType.Question);
+
+        // Give a bonus - maybe an extra life or score
+        score += 1000;
+    }
+
+    private void OnWrongAnswer(string selectedAnswer, string correctAnswer) {
+        GD.Print($"Player answered incorrectly! Selected {selectedAnswer}, correct was {correctAnswer}");
+        questionAnsweredCorrectly = false;
+        questionMenu.Hide();
+
+        // Resume the normal death sequence
+        UnFreezeBy(FreezeType.Question);
+        FreezeBy(FreezeType.Dead);
+
+        // Start pacman eaten trigger
+        pacmanEatenTrigger.Start(pacmanEatenFreezeTicks);
+
+        // Check number of lives
+        if (numLifes >= 1) {
+            readyStartedTrigger.Start(pacmanEatenFreezeTicks + pacmanDeathTicks);
+        }
+        else {
+            gameOverTrigger.Start(pacmanEatenFreezeTicks + pacmanDeathTicks);
+        }
+
+        // Stop sounds
+        StopSounds();
     }
 
     // draw (for debug)
