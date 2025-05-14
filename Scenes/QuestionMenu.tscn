@@ -1,0 +1,44 @@
+[gd_scene load_steps=2 format=3 uid="uid://dubcoja0nrdvm"]
+
+[ext_resource type="Script" uid="uid://edtdde7woo65" path="res://Scripts/QuestionMenu.cs" id="2_gj0pa"]
+
+[node name="QuestionMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_gj0pa")
+questionLabelPath = NodePath("QuestionLabel")
+buttonAPath = NodePath("ButtonA")
+buttonBPath = NodePath("ButtonB")
+buttonCPath = NodePath("ButtonC")
+buttonDPath = NodePath("ButtonD")
+
+[node name="QuestionLabel" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="ButtonA" type="Button" parent="."]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "A:"
+
+[node name="ButtonB" type="Button" parent="."]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "B:"
+
+[node name="ButtonC" type="Button" parent="."]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "C:"
+
+[node name="ButtonD" type="Button" parent="."]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "D:"
