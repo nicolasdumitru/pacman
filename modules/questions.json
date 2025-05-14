@@ -1,0 +1,9 @@
+[{
+		"question":	"What is the ability of machines to perform tasks that would normally require human intelligence?",
+		"options":	["Machine intelligence", "Data learning", "Data science", "Artificial intelligence"],
+		"correct_option":	"A"
+	}, {
+		"question":	"Which language is used for system programming?",
+		"options":	["Java", "Python", "HTML", "C"],
+		"correct_option":	"C"
+	}]

@@ -4,3 +4,5 @@ export_presets.cfg
 .idea/
 # Godot 4+ specific ignores
 .godot/
+.vscode
+build
