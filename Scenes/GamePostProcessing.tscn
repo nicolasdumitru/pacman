@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://bhhkfiv5wkapc"]
 
 [ext_resource type="PackedScene" uid="uid://d3lwelmk2syvt" path="res://Scenes/Game.tscn" id="1_8jq5i"]
-[ext_resource type="Script" uid="uid://edtdde7woo65" path="res://Scripts/QuestionMenu.cs" id="2_itvlk"]
+[ext_resource type="PackedScene" uid="uid://dubcoja0nrdvm" path="res://Scenes/QuestionMenu.tscn" id="2_itvlk"]
 [ext_resource type="Shader" uid="uid://cqdnbr1wlmmnn" path="res://Shaders/scale3x.gdshader" id="2_su0ma"]
 [ext_resource type="Shader" uid="uid://bg5pf70lvytbr" path="res://Shaders/paletteChanger.gdshader" id="2_xhr35"]
 [ext_resource type="Texture2D" uid="uid://cbc6rrjct8wm4" path="res://Assets/Palettes/comfort44s-1x.png" id="3_deqxv"]
@@ -39,47 +39,16 @@ canvas_item_default_texture_filter = 0
 size = Vector2i(224, 288)
 
 [node name="Game" parent="GameViewport" instance=ExtResource("1_8jq5i")]
+questionMenuScene = ExtResource("2_itvlk")
 
-[node name="QuestionMenu" type="Control" parent="GameViewport"]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("2_itvlk")
-questionLabelPath = NodePath("QuestionLabel")
-buttonAPath = NodePath("ButtonA")
-buttonBPath = NodePath("ButtonB")
-buttonCPath = NodePath("ButtonC")
-buttonDPath = NodePath("ButtonD")
-
-[node name="QuestionLabel" type="Label" parent="GameViewport/QuestionMenu"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-
-[node name="ButtonA" type="Button" parent="GameViewport/QuestionMenu"]
-layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
-text = "A:"
-
-[node name="ButtonB" type="Button" parent="GameViewport/QuestionMenu"]
-layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
-text = "B:"
-
-[node name="ButtonC" type="Button" parent="GameViewport/QuestionMenu"]
-layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
-text = "C:"
-
-[node name="ButtonD" type="Button" parent="GameViewport/QuestionMenu"]
-layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
-text = "D:"
+[node name="QuestionMenu" parent="GameViewport" instance=ExtResource("2_itvlk")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="GameScaledViewport" type="SubViewport" parent="."]
 disable_3d = true
@@ -123,3 +92,5 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("ViewportTexture_ld4iu")
+
+[editable path="GameViewport/QuestionMenu"]
