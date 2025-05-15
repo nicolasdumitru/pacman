@@ -1,0 +1,13 @@
+QUESTION: Which language is used for system programming?
+A: Python
+B: Java
+C: C
+D: HTML
+ANSWER: C
+
+QUESTION: What is the ability of machines to perform tasks that would normally require human intelligence?
+A: Artificial intelligence
+B: Data science
+C: Data learning
+D: Machine intelligence
+ANSWER: A

@@ -1,13 +1,419 @@
-QUESTION: Which language is used for system programming?
-A: Python
-B: Java
-C: C
-D: HTML
-ANSWER: C
-
 QUESTION: What is the ability of machines to perform tasks that would normally require human intelligence?
 A: Artificial intelligence
 B: Data science
 C: Data learning
 D: Machine intelligence
 ANSWER: A
+
+QUESTION: What is the name of the field of AI that focuses on developing algorithms to extract information from images and videos?
+A: Computer vision
+B: Natural language processing
+C: Video translation
+D: None of the answers
+ANSWER: A
+
+QUESTION: What is the most important thing to keep in mind when developing and deploying AI systems?
+A: All the answers
+B: AI systems should be aligned with human values
+C: AI systems need to be transparent and accountable
+D: AI systems should be made to be fair and unbiased
+ANSWER: A
+
+QUESTION: What is the most important thing that we need to do to ensure that AI is accessible to everyone?
+A: All the answers
+B: Invest in education and training to ensure that everyone has the skills and knowledge to use AI
+C: Promote the responsible development and use of AI
+D: Develop affordable and accessible AI tools and resources
+ANSWER: A
+
+QUESTION: What is the future of AI?
+A: All the answers
+B: AI will be used to replace humans for manual tasks
+C: AI will be used to solve challenges that humans can’t
+D: AI will become a big part of our lives
+ANSWER: A
+
+QUESTION: What is artificial intelligence (AI)?
+A: All the rest
+B: The ability of machines to mimic human behavior.
+C: The ability of machines to think and learn like humans.
+D: The ability of machines to perform tasks that would normally require human input.
+ANSWER: A
+
+QUESTION: What is the name of the field of AI that focuses on developing algorithms to understand and generate natural language?
+A: Natural language processing (NLP)
+B: Speech recognition
+C: Computer vision
+D: None of the answers
+ANSWER: A
+
+QUESTION: What type of AI algorithm can be used for ads?
+A: Recommendation engine
+B: Guess engine
+C: Ads learning
+D: Tracking engine
+ANSWER: A
+
+QUESTION: Which of the following is NOT a potential benefit of AI?
+A: Making certain jobs not needed anymore
+B: Increasing productivity
+C: Creating new products and services
+D: Improving decision making
+ANSWER: A
+
+QUESTION: Which of the following is NOT a way to measure the success of an AI system?
+A: Social impact
+B: Recall
+C: Accuracy
+D: Precision
+ANSWER: A
+
+QUESTION: Which of the following is a type of supervised learning?
+A: Regression
+B: Unsupervised learning
+C: Dimensionality reduction
+D: Reinforcement learning
+ANSWER: A
+
+QUESTION: Which of the following occurs when a model learns the training data too well and is unable to generalize to new data?
+A: Overfitting
+B: Guessing
+C: Underfitting
+D: Overestimating
+ANSWER: A
+
+QUESTION: What is the input for a machine learning model?
+A: Data
+B: Parameters
+C: Commands
+D: Code
+ANSWER: A
+
+QUESTION: What is the output of a machine learning model?
+A: Prediction
+B: Estimation
+C: Data
+D: Variables
+ANSWER: A
+
+QUESTION: What type of machine learning model is given labeled data?
+A: Supervised learning
+B: Deep learning
+C: Unsupervised learning
+D: Reinforcement learning
+ANSWER: A
+
+QUESTION: Which of the following is a field of study that gives computers the ability to learn without being explicitly programmed?
+A: Machine learning
+B: Database programming
+C: Data mining
+D: Web programming
+ANSWER: A
+
+QUESTION: What is the output of a machine learning algorithm?
+A: A model
+B: A hypothesis
+C: An educated guess
+D: A feature
+ANSWER: A
+
+QUESTION: Which type of machine learning does not receive labeled data?
+A: Unsupervised learning
+B: Semi-supervised learning
+C: Reinforcement learning
+D: Supervised learning
+ANSWER: A
+
+QUESTION: Which of the following is a parameter that is set before the training of a machine learning model?
+A: Hyperparameter
+B: Label
+C: Feature
+D: Instance
+ANSWER: A
+
+QUESTION: Which of the following is a set of data used to tune the hyperparameters of a machine learning model?
+A: Validation set
+B: Training set
+C: Development set
+D: Testing set
+ANSWER: A
+
+QUESTION: Which of the following is NOT a type of deep learning?
+A: Random Forest Logic
+B: Generative Adversarial Network
+C: Recurrent Neural Network
+D: Convolutional Neural Network
+ANSWER: A
+
+QUESTION: Which of the following domains can benefit from deep learning?
+A: All the rest
+B: Medicine
+C: Financial sector
+D: Car industry
+ANSWER: A
+
+QUESTION: Which deep learning technique is best suited for image recognition tasks?
+A: Convolutional Neural Network
+B: Autoencoder
+C: Recurrent Neural Network
+D: Generative Adversarial Network
+ANSWER: A
+
+QUESTION: Which deep learning technique is best suited for language interpretation tasks?
+A: Recurrent Neural Network
+B: Generative Adversarial Network
+C: Convolutional Neural Network
+D: Autoencoder
+ANSWER: A
+
+QUESTION: What does deep learning mean?
+A: A type of machine learning that uses artificial neural networks with multiple layers to learn from data
+B: A type of machine learning that is used only for hard tasks
+C: A type of machine learning that does not use neural networks
+D: A type of machine learning that uses only high volumes of data
+ANSWER: A
+
+QUESTION: Which one is the basic part of an artificial neural network?
+A: Neuron
+B: Layer
+C: Weight
+D: Function
+ANSWER: A
+
+QUESTION: Which one is the layer that receives data to feed the neural network?
+A: Input layer
+B: Output layer
+C: Hidden layer
+D: Outside layer
+ANSWER: A
+
+QUESTION: Which of the following is a type of machine learning that uses artificial neural networks with multiple hidden layers?
+A: Deep learning
+B: Supervised learning
+C: Layer learning
+D: Reinforcement learning
+ANSWER: A
+
+QUESTION: Which of the below is a challenge for deep learning?
+A: Explainability
+B: Cost
+C: Finding data
+D: Finding people who can create the programs
+ANSWER: A
+
+QUESTION: Which of the following is a type of deep learning model?
+A: Convolutional Neural Networks
+B: k-Nearest Neighbors
+C: Support Vector Machine
+D: Logistic Regression
+ANSWER: A
+
+QUESTION: How can we mitigate bias in AI?
+A: use a diverse dataset
+B: use more data
+C: use biased data
+D: use less data
+ANSWER: A
+
+QUESTION: What possible consequences can bias in AI lead to?
+A: discrimination
+B: efficiency
+C: accuracy
+D: transparency
+ANSWER: A
+
+QUESTION: What is the main cause of bias in AI programming?
+A: data bias
+B: human bias
+C: algorithmic bias
+D: judgment bias
+ANSWER: A
+
+QUESTION: Which of the following is NOT an example of algorithmic bias in AI?
+A: A search engine that is more likely to return results for popular websites than for less popular websites.
+B: A spam filter that is more likely to flag emails from women than from men.
+C: A resume screening algorithm that is more likely to recommend male candidates for high- paying jobs than female candidates.
+D: A facial recognition algorithm that is more accurate at identifying white people than black people.
+ANSWER: A
+
+QUESTION: Which can be an option to avoid bias in AI-powered decisions?
+A: have human oversight
+B: don’t use AI to take those decisions
+C: create a separate AI to validate the first one
+D: only use AI for small decisions
+ANSWER: A
+
+QUESTION: Which one is a way to mitigate bias in AI?
+A: Create audit systems for bias
+B: Don’t use the products
+C: Highlight the bias and ignore it
+D: Don’t question the output of the application
+ANSWER: A
+
+QUESTION: What is a possible consequence of bias in AI?
+A: Unfair outcomes
+B: Transparent outcomes
+C: Good enough outcomes
+D: Accurate outcomes
+ANSWER: A
+
+QUESTION: What is a correct definition for bias in AI?
+A: Bias in AI programming can lead to apps that favor a certain group of people or certain result
+B: Bias in AI programming can lead to apps that make mistakes
+C: Bias in AI programming can lead to apps that are inefficient
+D: Bias in AI programming can lead to apps that are created only for a certain situation
+ANSWER: A
+
+QUESTION: What is a cause of bias in AI?
+A: All the rest
+B: Data used to train the AI is not representative for the whole population
+C: The AI inherits the bias of the programmers
+D: The AI is too rudimentary to differentiate human nuances
+ANSWER: A
+
+QUESTION: Who is responsible for fighting and mitigating bias in AI programming?
+A: All the rest
+B: The programmers
+C: The private companies
+D: The public sector
+ANSWER: A
+
+QUESTION: Which of the following is a benefit of using AI to protect privacy?
+A: All the rest
+B: AI tools can be used to develop new encryption algorithms
+C: AI tools can be used to identify and remove personally identifiable information from data
+D: AI tools can be used to discover data breaches in the systems
+ANSWER: A
+
+QUESTION: Which of the following is NOT a type of privacy-preserving AI?
+A: Centralized learning
+B: Differential privacy
+C: Federated learning
+D: Secure multi-party computation
+ANSWER: A
+
+QUESTION: Which of the following is the most important thing to keep in mind when thinking about privacy in AI?
+A: Before releasing an AI product we need to prioritize the privacy elements of the system
+B: We can leave privacy element outside the system as those aren’t mandatory
+C: Privacy is just o module that need to be integrated
+D: Privacy concerns need to be addressed only when surfaced by users
+ANSWER: A
+
+QUESTION: Which of the following is a challenge to implementing privacy-preserving AI?
+A: All the rest
+B: The need to educate developers and users about privacy-preserving AI.
+C: The need to develop new algorithms and techniques.
+D: The need to address the potential for trade-offs between privacy and other important goals, such as accuracy and efficiency.
+ANSWER: A
+
+QUESTION: What is the difference between personally id entifiable information (PII) and non-personally identifiable information (non-PII)?
+A: PII is information that can be used to identify a specific individual, while non-PII information that cannot be used to identify a specific individual on its own
+B: PII is information that is used by businesses, while non-PII is information that is used by governments
+C: PII is information that is publicly available, while non-PII is information that is not publicly available
+D: PII is information that is collected online, while non-PII is information that is collected offline
+ANSWER: A
+
+QUESTION: Which of the following is NOT a privacy-preserving AI practice?
+A: Data sharing
+B: Data anonymization
+C: Data minimization
+D: Data differential privacy
+ANSWER: A
+
+Which of the following is an example of privacy-preserving AI?
+A: An assistant that respond to natural language
+B: A facial recognition tool to identify people on the street
+C: A recommendation tool that can offer suggestion based on past purchases
+D: All the other options
+ANSWER: A
+
+QUESTION: Which of the following is NOT a way to address privacy concerns related to AI?
+A: Using AI tools to gather more data from users
+B: Developing transparent AI products
+C: Giving users access and control over their data
+D: Creating privacy laws, regulations and principles
+ANSWER: A
+
+QUESTION: What is a privacy preserving AI principle?
+A: Using AI to process data so that it protects individual privacy
+B: Using AI to discriminate against individuals based on their data
+C: Using AI to collect as much data as possible about individuals
+D: Using AI to make decisions about individuals without their knowledge or consent
+ANSWER: A
+
+QUESTION: Which of the following is a risk when it comes to privacy when using AI-powered social media products?
+A: All the rest
+B: AI tools can be used to track our online presence and collect personal data without our knowledge or consent
+C: AI tools can be used to target users with personalized ads and content that is designed without our knowledge or consent
+D: AI tools can be used to create deep fakes that can be used to spread misinformation or damage the reputation of in dividuals or oganizations
+ANSWER: A
+
+QUESTION: Which of the following answers is NOT a benefit of transparency in AI ethics?
+A: It makes AI systems more accurate
+B: It helps to identify and mitigate ethical risks.
+C: It helps to build trust in AI.
+D: It helps to ensure that AI is used responsibly.
+ANSWER: A
+
+QUESTION: Which of the following answers is NOT a challenge to achieving transparency in AI ethics?
+A: AI developers are reluctant to share information about their systems.
+B: There is no general solution to solve transparency in AI
+C: There isn’t a standard or a guideline for AI transparency
+D: AI system are complex and difficult to explain
+ANSWER: A
+
+QUESTION: Which of the following is an example of a transparency- enhancing measure in AI ethics?
+A: All other answers.
+B: Publish the technical documentation for AI models and algorithms.
+C: Provide users with access to information about the data used to train AI models.
+D: Develop tools for explainable AI.
+ANSWER: A
+
+QUESTION: Which of the following is NOT expected from an ethical reviewer?
+A: Approving or rejecting the AI system for release.
+B: Reviewing the AI system to detect transparency issues.
+C: Provide guidance on how to develop the AI tools.
+D: Create documentation on how the AI system can become transparent.
+ANSWER: A
+
+QUESTION: Which of the following is the most important thing that can be done to promote transparency in AI ethics?
+A: All other answers.
+B: Hold AI programmers and their organizations accountable.
+C: Educate users on how AI systems work.
+D: Create playbooks on how AI systems can be more transparent.
+ANSWER: A
+
+QUESTION: Which of the following is NOT a way to measure transparency in AI ethics?
+A: The public's understanding of AI and how it works.
+B: The number of AI systems that are s ubject to ethical review.
+C: The number of published papers related to AI ethics.
+D: The understanding of programmers related to AI ethics.
+ANSWER: A
+
+QUESTION: Which of the following is NOT a potential cost of transparency in AI ethics?
+A: Increased public trust in the AI products.
+B: Decreased accuracy of the AI products.
+C: Increased cost of developing and maintaining the AI products.
+D: Increased risk of data privacy issues.
+ANSWER: A
+
+QUESTION: Which of the following is NOT a way to make AI systems more explainable?
+A: All other answers.
+B: Create visualization tools.
+C: Use smaller data samples.
+D: Use rudimentary algorithms.
+ANSWER: A
+
+QUESTION: Which of the following is the best way to ensure transparency in AI ethics?
+A: A hybrid approach, with governments, NGOs and industry working together to develop and implement transparency standards.
+B: A top-down approach, with governments and regulators mandating transparency requirements.
+C: Don’t implement any regulation or practices.
+D: A bottom-up approach, with AI companies and developers voluntarily adopting transparency practices.
+ANSWER: A
+
+QUESTION: Which of the following is NOT a challenge to achieving transparency in AI ethics?
+A: All the rest
+B: Lack of expertise.
+C: Lack of resources.
+D: Lack of time.
+ANSWER: A 

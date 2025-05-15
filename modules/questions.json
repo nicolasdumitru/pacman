@@ -1,9 +1,237 @@
 [{
-		"question":	"What is the ability of machines to perform tasks that would normally require human intelligence?",
-		"options":	["Artificial intelligence", "Machine intelligence", "Data learning", "Data science"],
+		"question":	"Which of the following is a type of deep learning model?",
+		"options":	["k-Nearest Neighbors", "Support Vector Machine", "Logistic Regression", "Convolutional Neural Networks"],
+		"correct_option":	"D"
+	}, {
+		"question":	"What possible consequences can bias in AI lead to?",
+		"options":	["accuracy", "discrimination", "transparency", "efficiency"],
+		"correct_option":	"B"
+	}, {
+		"question":	"Which deep learning technique is best suited for language interpretation tasks?",
+		"options":	["Autoencoder", "Convolutional Neural Network", "Generative Adversarial Network", "Recurrent Neural Network"],
+		"correct_option":	"D"
+	}, {
+		"question":	"What is the future of AI?",
+		"options":	["AI will be used to replace humans for manual tasks", "All the answers", "AI will become a big part of our lives", "AI will be used to solve challenges that humans can’t"],
+		"correct_option":	"B"
+	}, {
+		"question":	"Which of the below is a challenge for deep learning?",
+		"options":	["Finding people who can create the programs", "Explainability", "Cost", "Finding data"],
+		"correct_option":	"B"
+	}, {
+		"question":	"Which of the following is a set of data used to tune the hyperparameters of a machine learning model?",
+		"options":	["Development set", "Testing set", "Validation set", "Training set"],
+		"correct_option":	"C"
+	}, {
+		"question":	"Which type of machine learning does not receive labeled data?",
+		"options":	["Supervised learning", "Unsupervised learning", "Semi-supervised learning", "Reinforcement learning"],
+		"correct_option":	"B"
+	}, {
+		"question":	"What is artificial intelligence (AI)?",
+		"options":	["The ability of machines to think and learn like humans.", "All the rest", "The ability of machines to mimic human behavior.", "The ability of machines to perform tasks that would normally require human input."],
+		"correct_option":	"B"
+	}, {
+		"question":	"Which of the following is the most important thing that can be done to promote transparency in AI ethics?",
+		"options":	["Educate users on how AI systems work.", "Create playbooks on how AI systems can be more transparent.", "All other answers.", "Hold AI programmers and their organizations accountable."],
+		"correct_option":	"C"
+	}, {
+		"question":	"Which of the following is NOT a type of deep learning?",
+		"options":	["Generative Adversarial Network", "Random Forest Logic", "Convolutional Neural Network", "Recurrent Neural Network"],
+		"correct_option":	"B"
+	}, {
+		"question":	"What is the name of the field of AI that focuses on developing algorithms to extract information from images and videos?",
+		"options":	["Video translation", "Computer vision", "Natural language processing", "None of the answers"],
+		"correct_option":	"B"
+	}, {
+		"question":	"Which of the following is a type of machine learning that uses artificial neural networks with multiple hidden layers?",
+		"options":	["Reinforcement learning", "Supervised learning", "Layer learning", "Deep learning"],
+		"correct_option":	"D"
+	}, {
+		"question":	"Which of the following is a benefit of using AI to protect privacy?",
+		"options":	["All the rest", "AI tools can be used to discover data breaches in the systems", "AI tools can be used to develop new encryption algorithms", "AI tools can be used to identify and remove personally identifiable information from data"],
 		"correct_option":	"A"
 	}, {
-		"question":	"Which language is used for system programming?",
-		"options":	["Java", "HTML", "C", "Python"],
+		"question":	"Which of the following is NOT a way to measure transparency in AI ethics?",
+		"options":	["The number of published papers related to AI ethics.", "The understanding of programmers related to AI ethics.", "The number of AI systems that are s ubject to ethical review.", "The public's understanding of AI and how it works."],
+		"correct_option":	"D"
+	}, {
+		"question":	"What is the ability of machines to perform tasks that would normally require human intelligence?",
+		"options":	["Machine intelligence", "Data learning", "Data science", "Artificial intelligence"],
+		"correct_option":	"D"
+	}, {
+		"question":	"Which one is a way to mitigate bias in AI?",
+		"options":	["Highlight the bias and ignore it", "Create audit systems for bias", "Don’t question the output of the application", "Don’t use the products"],
+		"correct_option":	"B"
+	}, {
+		"question":	"Which of the following occurs when a model learns the training data too well and is unable to generalize to new data?",
+		"options":	["Guessing", "Overestimating", "Underfitting", "Overfitting"],
+		"correct_option":	"D"
+	}, {
+		"question":	"Which of the following is NOT a privacy-preserving AI practice?",
+		"options":	["Data differential privacy", "Data minimization", "Data anonymization", "Data sharing"],
+		"correct_option":	"D"
+	}, {
+		"question":	"Which of the following domains can benefit from deep learning?",
+		"options":	["Financial sector", "Medicine", "All the rest", "Car industry"],
 		"correct_option":	"C"
+	}, {
+		"question":	"What is the difference between personally id entifiable information (PII) and non-personally identifiable information (non-PII)?",
+		"options":	["PII is information that can be used to identify a specific individual, while non-PII information that cannot be used to identify a specific individual on its own", "PII is information that is used by businesses, while non-PII is information that is used by governments", "PII is information that is collected online, while non-PII is information that is collected offline", "PII is information that is publicly available, while non-PII is information that is not publicly available"],
+		"correct_option":	"A"
+	}, {
+		"question":	"What is the input for a machine learning model?",
+		"options":	["Commands", "Data", "Parameters", "Code"],
+		"correct_option":	"B"
+	}, {
+		"question":	"Which one is the layer that receives data to feed the neural network?",
+		"options":	["Outside layer", "Output layer", "Input layer", "Hidden layer"],
+		"correct_option":	"C"
+	}, {
+		"question":	"Which of the following is a field of study that gives computers the ability to learn without being explicitly programmed?",
+		"options":	["Data mining", "Web programming", "Machine learning", "Database programming"],
+		"correct_option":	"C"
+	}, {
+		"question":	"What is a cause of bias in AI?",
+		"options":	["The AI inherits the bias of the programmers", "Data used to train the AI is not representative for the whole population", "All the rest", "The AI is too rudimentary to differentiate human nuances"],
+		"correct_option":	"C"
+	}, {
+		"question":	"Which of the following is the best way to ensure transparency in AI ethics?",
+		"options":	["A top-down approach, with governments and regulators mandating transparency requirements.", "A hybrid approach, with governments, NGOs and industry working together to develop and implement transparency standards.", "Don’t implement any regulation or practices.", "A bottom-up approach, with AI companies and developers voluntarily adopting transparency practices."],
+		"correct_option":	"B"
+	}, {
+		"question":	"What is the most important thing to keep in mind when developing and deploying AI systems?",
+		"options":	["AI systems need to be transparent and accountable", "AI systems should be aligned with human values", "AI systems should be made to be fair and unbiased", "All the answers"],
+		"correct_option":	"D"
+	}, {
+		"question":	"Which of the following answers is NOT a benefit of transparency in AI ethics?",
+		"options":	["It makes AI systems more accurate", "It helps to ensure that AI is used responsibly.", "It helps to build trust in AI.", "It helps to identify and mitigate ethical risks."],
+		"correct_option":	"A"
+	}, {
+		"question":	"What type of machine learning model is given labeled data?",
+		"options":	["Unsupervised learning", "Reinforcement learning", "Deep learning", "Supervised learning"],
+		"correct_option":	"D"
+	}, {
+		"question":	"What is a privacy preserving AI principle?",
+		"options":	["Using AI to discriminate against individuals based on their data", "Using AI to process data so that it protects individual privacy", "Using AI to make decisions about individuals without their knowledge or consent", "Using AI to collect as much data as possible about individuals"],
+		"correct_option":	"B"
+	}, {
+		"question":	"What type of AI algorithm can be used for ads?",
+		"options":	["Guess engine", "Recommendation engine", "Tracking engine", "Ads learning"],
+		"correct_option":	"B"
+	}, {
+		"question":	"Which of the following is NOT an example of algorithmic bias in AI?",
+		"options":	["A spam filter that is more likely to flag emails from women than from men.", "A search engine that is more likely to return results for popular websites than for less popular websites.", "A resume screening algorithm that is more likely to recommend male candidates for high- paying jobs than female candidates.", "A facial recognition algorithm that is more accurate at identifying white people than black people."],
+		"correct_option":	"B"
+	}, {
+		"question":	"Which of the following is the most important thing to keep in mind when thinking about privacy in AI?",
+		"options":	["We can leave privacy element outside the system as those aren’t mandatory", "Privacy concerns need to be addressed only when surfaced by users", "Privacy is just o module that need to be integrated", "Before releasing an AI product we need to prioritize the privacy elements of the system"],
+		"correct_option":	"D"
+	}, {
+		"question":	"What does deep learning mean?",
+		"options":	["A type of machine learning that uses artificial neural networks with multiple layers to learn from data", "A type of machine learning that is used only for hard tasks", "A type of machine learning that uses only high volumes of data", "A type of machine learning that does not use neural networks"],
+		"correct_option":	"A"
+	}, {
+		"question":	"Which of the following answers is NOT a challenge to achieving transparency in AI ethics?",
+		"options":	["AI system are complex and difficult to explain", "There isn’t a standard or a guideline for AI transparency", "There is no general solution to solve transparency in AI", "AI developers are reluctant to share information about their systems."],
+		"correct_option":	"D"
+	}, {
+		"question":	"What is the output of a machine learning model?",
+		"options":	["Variables", "Estimation", "Prediction", "Data"],
+		"correct_option":	"C"
+	}, {
+		"question":	"Which of the following is a type of supervised learning?",
+		"options":	["Unsupervised learning", "Dimensionality reduction", "Regression", "Reinforcement learning"],
+		"correct_option":	"C"
+	}, {
+		"question":	"Who is responsible for fighting and mitigating bias in AI programming?",
+		"options":	["The public sector", "All the rest", "The private companies", "The programmers"],
+		"correct_option":	"B"
+	}, {
+		"question":	"Which of the following is an example of a transparency- enhancing measure in AI ethics?",
+		"options":	["Develop tools for explainable AI.", "Provide users with access to information about the data used to train AI models.", "Publish the technical documentation for AI models and algorithms.", "All other answers."],
+		"correct_option":	"D"
+	}, {
+		"question":	"Which of the following is a challenge to implementing privacy-preserving AI?",
+		"options":	["All the rest", "The need to educate developers and users about privacy-preserving AI.", "The need to develop new algorithms and techniques.", "The need to address the potential for trade-offs between privacy and other important goals, such as accuracy and efficiency."],
+		"correct_option":	"A"
+	}, {
+		"question":	"Which of the following is NOT a way to measure the success of an AI system?",
+		"options":	["Accuracy", "Social impact", "Recall", "Precision"],
+		"correct_option":	"B"
+	}, {
+		"question":	"Which one is the basic part of an artificial neural network?",
+		"options":	["Layer", "Neuron", "Weight", "Function"],
+		"correct_option":	"B"
+	}, {
+		"question":	"Which of the following is NOT expected from an ethical reviewer?",
+		"options":	["Create documentation on how the AI system can become transparent.", "Approving or rejecting the AI system for release.", "Provide guidance on how to develop the AI tools.", "Reviewing the AI system to detect transparency issues."],
+		"correct_option":	"B"
+	}, {
+		"question":	"How can we mitigate bias in AI?",
+		"options":	["use biased data", "use less data", "use a diverse dataset", "use more data"],
+		"correct_option":	"C"
+	}, {
+		"question":	"What is the output of a machine learning algorithm?",
+		"options":	["An educated guess", "A hypothesis", "A model", "A feature"],
+		"correct_option":	"C"
+	}, {
+		"question":	"What is a correct definition for bias in AI?",
+		"options":	["Bias in AI programming can lead to apps that are inefficient", "Bias in AI programming can lead to apps that are created only for a certain situation", "Bias in AI programming can lead to apps that favor a certain group of people or certain result", "Bias in AI programming can lead to apps that make mistakes"],
+		"correct_option":	"C"
+	}, {
+		"question":	"Which of the following is NOT a type of privacy-preserving AI?",
+		"options":	["Differential privacy", "Centralized learning", "Secure multi-party computation", "Federated learning"],
+		"correct_option":	"B"
+	}, {
+		"question":	"Which of the following is NOT a way to address privacy concerns related to AI?",
+		"options":	["Creating privacy laws, regulations and principles", "Giving users access and control over their data", "Developing transparent AI products", "Using AI tools to gather more data from users"],
+		"correct_option":	"D"
+	}, {
+		"question":	"Which of the following is a parameter that is set before the training of a machine learning model?",
+		"options":	["Feature", "Hyperparameter", "Label", "Instance"],
+		"correct_option":	"B"
+	}, {
+		"question":	"What is the most important thing that we need to do to ensure that AI is accessible to everyone?",
+		"options":	["Promote the responsible development and use of AI", "All the answers", "Develop affordable and accessible AI tools and resources", "Invest in education and training to ensure that everyone has the skills and knowledge to use AI"],
+		"correct_option":	"B"
+	}, {
+		"question":	"What is the main cause of bias in AI programming?",
+		"options":	["algorithmic bias", "judgment bias", "data bias", "human bias"],
+		"correct_option":	"C"
+	}, {
+		"question":	"Which of the following is NOT a potential cost of transparency in AI ethics?",
+		"options":	["Decreased accuracy of the AI products.", "Increased cost of developing and maintaining the AI products.", "Increased public trust in the AI products.", "Increased risk of data privacy issues."],
+		"correct_option":	"C"
+	}, {
+		"question":	"Which of the following is NOT a potential benefit of AI?",
+		"options":	["Increasing productivity", "Making certain jobs not needed anymore", "Improving decision making", "Creating new products and services"],
+		"correct_option":	"B"
+	}, {
+		"question":	"Which of the following is NOT a way to make AI systems more explainable?",
+		"options":	["Use rudimentary algorithms.", "All other answers.", "Create visualization tools.", "Use smaller data samples."],
+		"correct_option":	"B"
+	}, {
+		"question":	"Which can be an option to avoid bias in AI-powered decisions?",
+		"options":	["create a separate AI to validate the first one", "have human oversight", "don’t use AI to take those decisions", "only use AI for small decisions"],
+		"correct_option":	"B"
+	}, {
+		"question":	"Which of the following is NOT a challenge to achieving transparency in AI ethics?",
+		"options":	["Lack of resources.", "Lack of time.", "Lack of expertise.", "All the rest"],
+		"correct_option":	"D"
+	}, {
+		"question":	"Which deep learning technique is best suited for image recognition tasks?",
+		"options":	["Convolutional Neural Network", "Autoencoder", "Generative Adversarial Network", "Recurrent Neural Network"],
+		"correct_option":	"A"
+	}, {
+		"question":	"What is the name of the field of AI that focuses on developing algorithms to understand and generate natural language?",
+		"options":	["Computer vision", "Speech recognition", "None of the answers", "Natural language processing (NLP)"],
+		"correct_option":	"D"
+	}, {
+		"question":	"Which of the following is a risk when it comes to privacy when using AI-powered social media products?",
+		"options":	["AI tools can be used to track our online presence and collect personal data without our knowledge or consent", "All the rest", "AI tools can be used to create deep fakes that can be used to spread misinformation or damage the reputation of in dividuals or oganizations", "AI tools can be used to target users with personalized ads and content that is designed without our knowledge or consent"],
+		"correct_option":	"B"
+	}, {
+		"question":	"What is a possible consequence of bias in AI?",
+		"options":	["Transparent outcomes", "Unfair outcomes", "Accurate outcomes", "Good enough outcomes"],
+		"correct_option":	"B"
 	}]

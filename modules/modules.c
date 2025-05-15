@@ -5,6 +5,7 @@
 #include <time.h>
 
 // cjson library
+#include "../C_Libraries/cJSON-1.7.18/cJSON.c"
 #include "../C_Libraries/cJSON-1.7.18/cJSON.h"
 
 #define MAX_QUESTIONS 100
@@ -153,7 +154,7 @@ void shuffle_indices(MCQ *array, int size)
             strcpy(array[i].options[j], new_options[j]);
         }
 
-        array[i].correct_option = 'A' + new_correct_index;
+        array[i].correct_option = (char)('A' + new_correct_index);
     }
 }
 
