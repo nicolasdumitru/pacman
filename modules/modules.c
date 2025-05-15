@@ -125,29 +125,38 @@ void loadQuestions(const char *filename)
 
 void shuffle_indices(MCQ *array, int size)
 {
-    for (int i=0; i < size; i++)
+    for (int i = 0; i < size; i++)
     {
-        int correct_option_index=array[i].correct_option-'A';
-        for(int j=0;j<4;j++)
-            {
-                int random_index=rand()%4;
-                char temp[MAX_LINE_LEN];
-                strcpy(temp,array[i].options[j]);
-                strcpy(array[i].options[j],array[i].options[random_index]);
-                strcpy(array[i].options[random_index],temp);
-                if(correct_option_index==j)
-                    {
-                        array[i].correct_option='A'+j;
-                        correct_option_index='A'+j;
-                    }
-                else if(correct_option_index==random_index)
-                {
-                    array[i].correct_option='A'+random_index;
-                    correct_option_index='A'+random_index;
-                }
-            }
+        int correct_index = array[i].correct_option - 'A';
+
+        // Create an array of indices and shuffle it
+        int indices[4] = {0, 1, 2, 3};
+        for (int j = 3; j > 0; j--)
+        {
+            int rand_idx = rand() % (j + 1);
+            int temp = indices[j];
+            indices[j] = indices[rand_idx];
+            indices[rand_idx] = temp;
+        }
+
+        char new_options[4][MAX_LINE_LEN];
+        int new_correct_index = -1;
+        for (int j = 0; j < 4; j++)
+        {
+            strcpy(new_options[j], array[i].options[indices[j]]);
+            if (indices[j] == correct_index)
+                new_correct_index = j;
+        }
+
+        for (int j = 0; j < 4; j++)
+        {
+            strcpy(array[i].options[j], new_options[j]);
+        }
+
+        array[i].correct_option = 'A' + new_correct_index;
     }
 }
+
 
 void shuffle_questions(MCQ *array, int size)
 {
