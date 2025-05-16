@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://j0jb2i5ckkts"]
+[gd_scene load_steps=5 format=3 uid="uid://j0jb2i5ckkts"]
 
 [ext_resource type="Script" uid="uid://c2v5ehyywkfa0" path="res://scripts/GameManager.cs" id="1_elqb8"]
+[ext_resource type="PackedScene" uid="uid://der45588tcvdt" path="res://scenes/Ghost.tscn" id="1_rarhs"]
+[ext_resource type="Script" uid="uid://cuqo6rjuxa26h" path="res://scripts/GhostManager.cs" id="2_0bbpv"]
 [ext_resource type="PackedScene" uid="uid://boo3niasn8x74" path="res://scenes/Pacman.tscn" id="2_rvslj"]
 
 [node name="Main" type="Node2D"]
@@ -18,12 +20,28 @@ format = 2
 
 [node name="Ghosts" type="Node2D" parent="."]
 
+[node name="Blinky" parent="Ghosts" instance=ExtResource("1_rarhs")]
+position = Vector2(103, 9)
+
+[node name="Clyde" parent="Ghosts" instance=ExtResource("1_rarhs")]
+position = Vector2(47, -60)
+Type = 3
+
+[node name="Inky" parent="Ghosts" instance=ExtResource("1_rarhs")]
+position = Vector2(39, 7)
+Type = 2
+
+[node name="Pinky" parent="Ghosts" instance=ExtResource("1_rarhs")]
+position = Vector2(72, 74)
+Type = 1
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="GameManager" type="Node" parent="."]
 script = ExtResource("1_elqb8")
 
 [node name="GhostManager" type="Node" parent="GameManager"]
+script = ExtResource("2_0bbpv")
 
 [node name="ModeTimer" type="Timer" parent="GameManager/GhostManager"]
 

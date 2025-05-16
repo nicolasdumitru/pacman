@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://boo3niasn8x74"]
 
-[ext_resource type="Script" uid="uid://bx5qtfjpdkvrm" path="res://scripts/pacman.gd" id="1_wxm8g"]
+[ext_resource type="Script" uid="uid://cryxro6kov1ah" path="res://scripts/Pacman.cs" id="1_vkwlo"]
 [ext_resource type="Texture2D" uid="uid://8nyeebv0klfo" path="res://assets/sprites/spritesheet.png" id="2_wxm8g"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wxm8g"]
@@ -87,13 +87,12 @@ radius = 7.0
 
 [node name="Pacman" type="CharacterBody2D"]
 collision_layer = 2
-script = ExtResource("1_wxm8g")
+script = ExtResource("1_vkwlo")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_e5sx2")
 animation = &"face_right"
 autoplay = "face_right"
-frame_progress = 0.241407
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_wxm8g")
