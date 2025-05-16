@@ -1,6 +1,29 @@
-[gd_scene load_steps=3 format=3 uid="uid://boo3niasn8x74"]
+[gd_scene load_steps=7 format=3 uid="uid://boo3niasn8x74"]
 
 [ext_resource type="Script" uid="uid://cryxro6kov1ah" path="res://scripts/Pacman.cs" id="1_vkwlo"]
+[ext_resource type="Texture2D" uid="uid://8nyeebv0klfo" path="res://assets/sprites/spritesheet.png" id="2_wxm8g"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_70sto"]
+atlas = ExtResource("2_wxm8g")
+region = Rect2(464, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fpgi6"]
+atlas = ExtResource("2_wxm8g")
+region = Rect2(448, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e5sx2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_70sto")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fpgi6")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wxm8g"]
 radius = 7.0
@@ -10,6 +33,9 @@ collision_layer = 2
 script = ExtResource("1_vkwlo")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_e5sx2")
+autoplay = "default"
+frame_progress = 0.655726
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_wxm8g")
