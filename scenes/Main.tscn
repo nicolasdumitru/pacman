@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://j0jb2i5ckkts"]
+
+[ext_resource type="Script" uid="uid://c2v5ehyywkfa0" path="res://scripts/GameManager.cs" id="1_elqb8"]
+
+[node name="Main" type="Node2D"]
+
+[node name="MazeBackground" type="Sprite2D" parent="."]
+
+[node name="Walls" type="TileMap" parent="."]
+format = 2
+
+[node name="Pellets" type="Node2D" parent="."]
+
+[node name="PowerPellets" type="Node2D" parent="."]
+
+[node name="Tunnels" type="Node2D" parent="."]
+
+[node name="Ghosts" type="Node2D" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="GameManager" type="Node" parent="."]
+script = ExtResource("1_elqb8")
+
+[node name="GhostManager" type="Node" parent="GameManager"]
+
+[node name="ModeTimer" type="Timer" parent="GameManager/GhostManager"]
