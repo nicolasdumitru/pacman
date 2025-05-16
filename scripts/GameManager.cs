@@ -4,5 +4,5 @@ using System;
 public partial class GameManager : Node
 {
 
-# test
+ //test
 }
